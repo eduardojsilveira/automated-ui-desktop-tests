@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Automated.WinAppDriver.UI.Tests.Features
+namespace WinAppDriver.Tests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -66,7 +66,7 @@ namespace Automated.WinAppDriver.UI.Tests.Features
             if (((testRunner.FeatureContext != null) 
                         && (testRunner.FeatureContext.FeatureInfo.Title != "Calculator")))
             {
-                global::Automated.WinAppDriver.UI.Tests.Features.CalculatorFeature.FeatureSetup(null);
+                global::WinAppDriver.Tests.Features.CalculatorFeature.FeatureSetup(null);
             }
         }
         
