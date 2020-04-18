@@ -4,3 +4,8 @@ bin
 obj
 /.vs/automated-ui-desktop-tests/v15
 /.vs
+*.suo
+/Automated.Desktop.Tests/.vs/Automated.Desktop.Tests/v15/Server/sqlite3/*.lock
+/Automated.Desktop.Tests/.vs/Automated.Desktop.Tests/v15/Server/sqlite3/*.ide
+*.ide-shm
+*.ide-wal
