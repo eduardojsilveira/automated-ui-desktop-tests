@@ -5,4 +5,4 @@ Project with automated ui desktop tests using the current frameworks:
 - SpecFlow
 - MsTest V2 
 - Fluent Assertions 
-- Fla UI V2
+- WinAppDriver Release 1.2
