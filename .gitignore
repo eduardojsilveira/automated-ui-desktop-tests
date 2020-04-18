@@ -1,6 +1,6 @@
-/Automated.Desktop.UI.Tests/TestResults
+/Automated.Desktop.Tests/TestResults
 packages
 bin
 obj
-/Automated.Desktop.UI.Tests/.vs/Automated.Desktop.UI.Tests/v15
+/.vs/automated-ui-desktop-tests/v15
 /.vs
