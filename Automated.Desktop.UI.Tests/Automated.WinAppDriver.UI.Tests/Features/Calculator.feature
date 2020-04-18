@@ -12,7 +12,4 @@ Scenario Outline: Standard Calculator
 Examples: 
 | number1 | number2 | operator | result |
 | 330     | 70      | +	       | 400    |
-| 30      | 29      | -		   | 1      |
-| 2       | 250     | *        | 500    |
-| 1000    | 4       | /        | 250    |
 
