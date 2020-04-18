@@ -5,7 +5,7 @@ using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.UIA2;
 
-namespace Automated.UI.Desktop.Tests
+namespace Automated.FlaUI.Tests
 {
     public class FlaUIWrapper
     {

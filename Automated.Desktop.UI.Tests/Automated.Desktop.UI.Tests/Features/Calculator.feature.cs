@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Automated.Desktop.UI.Tests.Features
+namespace Automated.FlaUI.Tests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -66,7 +66,7 @@ namespace Automated.Desktop.UI.Tests.Features
             if (((testRunner.FeatureContext != null) 
                         && (testRunner.FeatureContext.FeatureInfo.Title != "Calculator")))
             {
-                global::Automated.Desktop.UI.Tests.Features.CalculatorFeature.FeatureSetup(null);
+                global::Automated.FlaUI.Tests.Features.CalculatorFeature.FeatureSetup(null);
             }
         }
         

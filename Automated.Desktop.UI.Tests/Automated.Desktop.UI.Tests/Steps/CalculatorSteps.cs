@@ -6,7 +6,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.Core.AutomationElements;
 
-namespace Automated.UI.Desktop.Tests.Steps
+namespace Automated.FlaUI.Tests.Steps
 {
     [Binding]
     public class CalculatorSteps
