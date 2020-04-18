@@ -11,8 +11,8 @@ Scenario Outline: Standard Calculator
 	Then the result <result> should be shown on the screen
 Examples: 
 | number1 | number2 | operator | result |
-| 50      | 70      | +	       | 120    |
-| 30      | 20      | -		   | 10     |
-| 2       | 25      | *        | 50     |
-| 100     | 4       | /        | 25     |
+| 330     | 70      | +	       | 400    |
+| 30      | 29      | -		   | 1      |
+| 2       | 250     | *        | 500    |
+| 1000    | 4       | /        | 250    |
 
