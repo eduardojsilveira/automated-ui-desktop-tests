@@ -1,23 +1,20 @@
-﻿using System;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 using FluentAssertions;
-using FluentAssertions.Execution;
-using Automated.WinAppDriver.UI.Tests;
 using OpenQA.Selenium;
-using System.Text.RegularExpressions;
+using WinAppDriver.Tests.Calculator;
 
 namespace Automated.FlaUI.Tests.Steps
 {
     [Binding]
     public class CalculatorSteps
     {
-        private const string ApplicationName = "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App";
-
         [Given(@"I have entered (.*) into the calculator")]
-        public void GivenIHaveEnteredIntoTheCalculator(string number)
+        public void GivenIHaveEnteredIntoTheCalculator(double number)
         {
-            WinAppWrapper.Session.Keyboard.SendKeys(number);
+            CalculatorApp.Session.Keyboard.SendKeys(number.ToString().Replace(".",","));
 
+            if (number < default(double))
+                CalculatorApp.Standard.NegateButton.Click();          
         }
        
         [When(@"I press the operator (.*)")]
@@ -45,42 +42,72 @@ namespace Automated.FlaUI.Tests.Steps
             }
 
 
-            WinAppWrapper.Session.Keyboard.SendKeys(value);
+            CalculatorApp.Session.Keyboard.SendKeys(value);
 
         }
 
         [When(@"I have entered (.*) into the calculator")]
-        public void WhenIHaveEnteredIntoTheCalculator(string number)
+        public void WhenIHaveEnteredIntoTheCalculator(double number)
         {
-            WinAppWrapper.Session.Keyboard.SendKeys(number);
-            WinAppWrapper.Session.Keyboard.SendKeys(Keys.Enter);
+            CalculatorApp.Session.Keyboard.SendKeys(number.ToString().Replace(".",","));
+            CalculatorApp.Session.Keyboard.SendKeys(Keys.Enter);
+        }
+
+        [When(@"I press the square function")]
+        public void WhenIPressTheSquareFunction()
+        {
+            CalculatorApp.Standard.SquareRootButton.Click();
+        }
+
+        [When(@"I press the x squared function")]
+        public void WhenIPressTheXSquaredFunction()
+        {
+            CalculatorApp.Standard.XSquaredButton.Click();
+        }
+
+        [When(@"I press the x cubed function")]
+        public void WhenIPressTheXCubedFunction()
+        {
+            CalculatorApp.Scientific.XCubeButton.Click();
         }
 
         [Then(@"the result (.*) should be shown on the screen")]
         public void ThenTheResultShouldBeShownOnTheScreen(string result)
         {
-            var element = WinAppWrapper.Session.FindElementByAccessibilityId("CalculatorResults");
+            var element = CalculatorApp.CalculatorResults;
             element.Should().NotBeNull();
-            element.Text.Should().Contain(result);
+            element.Text.Should().Contain(result.ToString());
         }
 
-        [BeforeFeature]
+        [BeforeTestRun]
         public static void LaunchApplication()
         {
-            //FlaUIWrapper.LaunchApplication(ApplicationName);
-            WinAppWrapper.OpenSession(ApplicationName);
+            CalculatorApp.StartCalculator();
         }
 
-        [AfterFeature]
+        [BeforeFeature("Scientific")]
+        public static void GoToScentificCalculator()
+        {
+            CalculatorApp.SwitchToMenu("Scientific");
+        }
+
+        [BeforeFeature("Standard")]
+        public static void GoToStandardCalculator()
+        {
+            CalculatorApp.SwitchToMenu("Standard");
+        }
+
+        [AfterTestRun]
         public static void CloseApplication()
         {
-            WinAppWrapper.CloseSession();
+            CalculatorApp.CloseCalculator();
         }
 
-        [AfterScenario("Standard", "Scentific")]
+        [AfterScenario("Standard", "Scientific")]
         public void ClearOperations()
         {
-            var element = WinAppWrapper.Session.FindElementByAccessibilityId("clearEntryButton");
+            var element = CalculatorApp.ClearEntry;
+            element.Should().NotBeNull();
             element.Click();
         }
     }

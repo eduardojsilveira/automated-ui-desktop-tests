@@ -11,23 +11,23 @@ namespace Automated.WinAppDriver.UI.Tests
     public class WinAppWrapper
     {
         private const string WinAppDriverUrl = "http://127.0.0.1:4723";
-        public static WindowsDriver<WindowsElement> Session { get; private set; }
 
-        public static void OpenSession(string applicationName)
+        public static WindowsDriver<WindowsElement> OpenSession(string applicationName)
         {
+            WindowsDriver<WindowsElement> session;
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.SetCapability("app", applicationName);
             desiredCapabilities.SetCapability("deviceName", "WindowsPC");
-            Session = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl),desiredCapabilities);
-            Session.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            session = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl),desiredCapabilities);
+            session.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            return session;
         }
 
-        public static void CloseSession()
+        public static void CloseSession(WindowsDriver<WindowsElement> session)
         {
-            if(Session != null)
+            if(session != null)
             {
-                Session.Quit();
-                Session = null;
+                session.Quit();
             }
         }
     }
