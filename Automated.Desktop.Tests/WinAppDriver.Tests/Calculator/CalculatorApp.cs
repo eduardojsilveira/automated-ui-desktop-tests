@@ -18,13 +18,13 @@ namespace WinAppDriver.Tests.Calculator
 
         public static ScientificCalculator Scientific { get; private set; }
 
-        public static WindowsElement ClearEntry => Session?.FindElementByAccessibilityId("clearEntryButton");
+        public static WindowsElement ClearEntry => WinAppWrapper.GetElement(Session,"clearEntryButton");
 
-        public static WindowsElement CalculatorResults => Session?.FindElementByAccessibilityId("CalculatorResults");
+        public static WindowsElement CalculatorResults => WinAppWrapper.GetElement(Session,"CalculatorResults");
 
-        public static WindowsElement Header => Session?.FindElementByAccessibilityId("Header");
+        public static WindowsElement Header => WinAppWrapper.GetElement(Session,"Header");
 
-        private static WindowsElement ToggleMenuButton => Session?.FindElementByAccessibilityId("TogglePaneButton");
+        private static WindowsElement ToggleMenuButton => WinAppWrapper.GetElement(Session,"TogglePaneButton");
 
         public static void StartCalculator()
         {
@@ -41,7 +41,7 @@ namespace WinAppDriver.Tests.Calculator
         public static void SwitchToMenu(string option)
         {
             ToggleMenuButton.Click();
-            var menuItems = Session?.FindElementByAccessibilityId("MenuItemsHost");
+            var menuItems = WinAppWrapper.GetElement(Session,"MenuItemsHost");
             var menuOption = menuItems?.FindElementByAccessibilityId(option);
             menuOption?.Click();
         }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using Automated.WinAppDriver.UI.Tests;
+using OpenQA.Selenium.Appium.Windows;
 using System;
 
 namespace WinAppDriver.Tests.Calculator
@@ -12,10 +13,10 @@ namespace WinAppDriver.Tests.Calculator
             Calculator = calculator ?? throw new ArgumentNullException(nameof(calculator));
         }
 
-        public WindowsElement XSquaredButton => Calculator?.FindElementByAccessibilityId("xpower2Button");
+        public WindowsElement XSquaredButton => WinAppWrapper.GetElement(Calculator,"xpower2Button");
 
-        public WindowsElement XCubeButton => Calculator?.FindElementByAccessibilityId("xpower3Button");
+        public WindowsElement XCubeButton => WinAppWrapper.GetElement(Calculator, "xpower3Button");
 
-        public WindowsElement FactorialButton => Calculator?.FindElementByAccessibilityId("factorialButton");
+        public WindowsElement FactorialButton => WinAppWrapper.GetElement(Calculator, "factorialButton");
     }
 }

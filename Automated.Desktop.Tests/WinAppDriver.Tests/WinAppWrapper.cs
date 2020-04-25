@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +20,39 @@ namespace Automated.WinAppDriver.UI.Tests
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.SetCapability("app", applicationName);
             desiredCapabilities.SetCapability("deviceName", "WindowsPC");
-            session = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl),desiredCapabilities);
-            session.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            session = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), desiredCapabilities);
             return session;
+        }
+
+        public static WindowsElement GetElement(WindowsDriver<WindowsElement> session, string automationId, int timeout = 5000)
+        {
+            if (session == null) throw new ArgumentNullException(nameof(session));
+
+            WindowsElement element = null;
+
+            var wait = new DefaultWait<WindowsDriver<WindowsElement>>(session)
+            {
+                Timeout = TimeSpan.FromMilliseconds(timeout),
+                Message = $"Component {automationId} not found",
+            };
+
+            wait.IgnoreExceptionTypes(typeof(WebDriverException));
+
+            try
+            {
+                wait.Until(s =>
+                {
+                    element = session.FindElementByAccessibilityId(automationId);
+
+                    return element != null;
+                });
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return element;
         }
 
         public static void CloseSession(WindowsDriver<WindowsElement> session)
