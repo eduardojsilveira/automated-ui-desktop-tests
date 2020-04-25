@@ -15,5 +15,7 @@ namespace WinAppDriver.Tests.Calculator
         public WindowsElement XSquaredButton => Calculator?.FindElementByAccessibilityId("xpower2Button");
 
         public WindowsElement XCubeButton => Calculator?.FindElementByAccessibilityId("xpower3Button");
+
+        public WindowsElement FactorialButton => Calculator?.FindElementByAccessibilityId("factorialButton");
     }
 }

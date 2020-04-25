@@ -15,3 +15,17 @@ Examples:
 | -3      | -27    |
 | 0.5     | 0,125  |
 | -0.7    | -0,343 | 
+
+@Scientific 
+Scenario Outline: Factorial Function 
+Given I have entered <number1> into the calculator
+When I press the factorial function 
+Then the result <result> should be shown on the screen
+Examples: 
+| number1 | result        |
+| 0       | 1             |
+| 1       | 1             |
+| 2       | 2             |
+| 5       | 120           |
+| -1      | Invalid input |
+

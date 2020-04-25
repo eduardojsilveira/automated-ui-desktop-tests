@@ -71,6 +71,13 @@ namespace Automated.FlaUI.Tests.Steps
             CalculatorApp.Scientific.XCubeButton.Click();
         }
 
+        [When(@"I press the factorial function")]
+        public void WhenIPressTheFactorialFunction()
+        {
+            CalculatorApp.Scientific.FactorialButton.Click();
+        }
+
+
         [Then(@"the result (.*) should be shown on the screen")]
         public void ThenTheResultShouldBeShownOnTheScreen(string result)
         {
