@@ -19,26 +19,19 @@ namespace Automated.FlaUI.Tests.Steps
         [Given(@"I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredIntoTheCalculator(double number)
         {
-            Context.User().Given(Keyboard.TypeKeys(number.ToString().Replace(".", ",")));
-            
-            //if (number < default(double))
-            //    CalculatorApp.Standard.NegateButton.Click();          
+            Context.User().Given(Keyboard.TypeNumber(number));        
         }
        
         [When(@"I press the operator (.*)")]
         public void WhenIPressTheOperator(string operation)
         {
             Context.User().When(Keyboard.TypeOperator(operation));
-            //CalculatorApp.Session.Keyboard.SendKeys(value);
         }
 
         [When(@"I have entered (.*) into the calculator")]
         public void WhenIHaveEnteredIntoTheCalculator(double number)
         {
             Context.User().When(Keyboard.TypeKeys(number.ToString().Replace(".", ",")), Keyboard.TypeKeys(Keys.Enter));
-            //Context.User().When();
-            //CalculatorApp.Session.Keyboard.SendKeys(number.ToString().Replace(".",","));
-            //CalculatorApp.Session.Keyboard.SendKeys(Keys.Enter);
         }
 
         [When(@"I press the square function")]

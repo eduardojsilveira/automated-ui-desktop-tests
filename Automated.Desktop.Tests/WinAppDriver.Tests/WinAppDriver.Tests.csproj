@@ -146,7 +146,9 @@
     <Compile Include="Actions\Click.cs" />
     <Compile Include="Actions\Keyboard.cs" />
     <Compile Include="Actions\MenuItem.cs" />
+    <Compile Include="Actions\NegateButton.cs" />
     <Compile Include="Actions\SwitchTo.cs" />
+    <Compile Include="Actions\TypeNumber.cs" />
     <Compile Include="Actions\TypeOperation.cs" />
     <Compile Include="Actions\TypeLetter.cs" />
     <Compile Include="Calculator\CalculatorApp.cs" />

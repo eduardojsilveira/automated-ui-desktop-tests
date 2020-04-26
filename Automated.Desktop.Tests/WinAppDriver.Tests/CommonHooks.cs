@@ -18,7 +18,6 @@ namespace WinAppDriver.Tests
         [BeforeTestRun]
         public static void LaunchApplication()
         {
-            //driver = Calculator.Calculator.Driver();
             Calculator = CalculatorApp.Instance;
         }
 
@@ -37,7 +36,6 @@ namespace WinAppDriver.Tests
         [AfterTestRun]
         public static void CloseApplication()
         {
-            //CalculatorApp.CloseCalculator();
             Calculator.Close();
         }
 
