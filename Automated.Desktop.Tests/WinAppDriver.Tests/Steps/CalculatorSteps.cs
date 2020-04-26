@@ -2,43 +2,40 @@
 using FluentAssertions;
 using OpenQA.Selenium;
 using WinAppDriver.Tests.Calculator;
-using Tranquire;
 using WinAppDriver.Tests;
 using WinAppDriver.Tests.Actions;
 using WinAppDriver.Tests.Questions;
+using CSF.Screenplay;
+using System;
+using WinAppDriver.Tests.Screenplay.Actors;
+using static CSF.Screenplay.StepComposer;
+using WinAppDriver.Tests.Screenplay.Actions;
 
 namespace Automated.FlaUI.Tests.Steps
 {
     [Binding]
     public class CalculatorSteps : StepsBase
     {
-        public CalculatorSteps(ScenarioContext context) : base(context)
-        {
-           
+        public CalculatorSteps(IStage stage) : base (stage)
+        {          
         }
         [Given(@"I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredIntoTheCalculator(double number)
-        {
-            Context.User().Given(Keyboard.TypeKeys(number.ToString().Replace(".", ",")));
-            
-            //if (number < default(double))
-            //    CalculatorApp.Standard.NegateButton.Click();          
+        {         
+            Given(User).WasAbleTo(Keyboard.TypeNumber(number));          
         }
        
         [When(@"I press the operator (.*)")]
         public void WhenIPressTheOperator(string operation)
         {
-            Context.User().When(Keyboard.TypeOperator(operation));
-            //CalculatorApp.Session.Keyboard.SendKeys(value);
+            When(User).AttemptsTo(Keyboard.TypeOperator(operation));
         }
 
         [When(@"I have entered (.*) into the calculator")]
         public void WhenIHaveEnteredIntoTheCalculator(double number)
         {
-            Context.User().When(Keyboard.TypeKeys(number.ToString().Replace(".", ",")), Keyboard.TypeKeys(Keys.Enter));
-            //Context.User().When();
-            //CalculatorApp.Session.Keyboard.SendKeys(number.ToString().Replace(".",","));
-            //CalculatorApp.Session.Keyboard.SendKeys(Keys.Enter);
+            When(User).AttemptsTo(Keyboard.TypeNumber(number));
+            When(User).AttemptsTo(Keyboard.TypeKeys(Keys.Enter));
         }
 
         [When(@"I press the square function")]
@@ -69,7 +66,7 @@ namespace Automated.FlaUI.Tests.Steps
         [Then(@"the result (.*) should be shown on the screen")]
         public void ThenTheResultShouldBeShownOnTheScreen(string expected)
         {
-            Context.User().Then(CalculatorResult.Display, result => result.Should().BeEquivalentTo(expected));
+            Then(User).ShouldSee(CalculatorResult.Display).Should().BeEquivalentTo(expected);
         }
 
         

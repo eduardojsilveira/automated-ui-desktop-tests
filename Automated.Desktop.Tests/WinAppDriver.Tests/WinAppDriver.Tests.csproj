@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props')" />
-  <Import Project="..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.props" Condition="Exists('..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.props')" />
   <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -49,6 +47,21 @@
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Configuration, Version=1.1.2.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSF.Configuration.1.1.2\lib\net45\CSF.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.FlexDi, Version=1.0.2.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSF.FlexDi.1.0.2\lib\net45\CSF.FlexDi.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Screenplay, Version=1.0.0.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSF.Screenplay.1.0.0\lib\net45\CSF.Screenplay.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Screenplay.SpecFlowPlugin, Version=1.0.7023.39094, Culture=neutral, PublicKeyToken=83989bab8a1a4730, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSF.Screenplay.SpecFlow.1.0.0\lib\net45\CSF.Screenplay.SpecFlowPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Utils, Version=6.1.1.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSF.Utils.6.1.1\lib\net45\CSF.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Cucumber.Messages, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b10c5988214f940c, processorArchitecture=MSIL">
       <HintPath>..\packages\Cucumber.Messages.6.0.1\lib\net45\Cucumber.Messages.dll</HintPath>
@@ -122,14 +135,8 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TechTalk.SpecFlow, Version=3.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.3.1.97\lib\net45\TechTalk.SpecFlow.dll</HintPath>
-    </Reference>
-    <Reference Include="TechTalk.SpecFlow.MSTest.SpecFlowPlugin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.MsTest.3.1.97\lib\net45\TechTalk.SpecFlow.MSTest.SpecFlowPlugin.dll</HintPath>
-    </Reference>
-    <Reference Include="Tranquire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1dc199d21f3bf4d2, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tranquire.1.0.39\lib\net45\Tranquire.dll</HintPath>
+    <Reference Include="TechTalk.SpecFlow, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.2.4.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
       <HintPath>..\packages\Utf8Json.1.3.7\lib\net47\Utf8Json.dll</HintPath>
@@ -142,29 +149,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ClearEntry.cs" />
-    <Compile Include="Actions\Click.cs" />
-    <Compile Include="Actions\Keyboard.cs" />
-    <Compile Include="Actions\MenuItem.cs" />
-    <Compile Include="Actions\SwitchTo.cs" />
-    <Compile Include="Actions\TypeOperation.cs" />
-    <Compile Include="Actions\TypeLetter.cs" />
+    <Compile Include="Features\ScientificCalculator.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScientificCalculator.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\StandardCalculator.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandardCalculator.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Screenplay\Abilities\ExecuteCalculator.cs" />
+    <Compile Include="Screenplay\Actions\ClearEntry.cs" />
+    <Compile Include="Screenplay\Actions\Click.cs" />
+    <Compile Include="Screenplay\Actions\Keyboard.cs" />
+    <Compile Include="Screenplay\Actions\MenuItem.cs" />
+    <Compile Include="Screenplay\Actions\NegateButton.cs" />
+    <Compile Include="Screenplay\Actions\SwitchToMenu.cs" />
+    <Compile Include="Screenplay\Actions\TypeNumber.cs" />
+    <Compile Include="Screenplay\Actions\TypeOperation.cs" />
+    <Compile Include="Screenplay\Actions\TypeLetter.cs" />
     <Compile Include="Calculator\CalculatorApp.cs" />
     <Compile Include="Calculator\Scentific.cs" />
     <Compile Include="Calculator\Standard.cs" />
     <Compile Include="CommonHooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseContext.cs" />
-    <Compile Include="Questions\DisplayResult.cs" />
-    <Compile Include="Questions\CalculatorResult.cs" />
+    <Compile Include="Screenplay\Actors\User.cs" />
+    <Compile Include="Screenplay\Questions\DisplayResult.cs" />
+    <Compile Include="Screenplay\Questions\CalculatorResult.cs" />
+    <Compile Include="ScreenplayIntegrationConfig.cs" />
     <Compile Include="StepsBase.cs" />
     <Compile Include="Steps\CalculatorSteps.cs" />
     <Compile Include="WinAppWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Features\ScientificCalculator.feature" />
-    <None Include="Features\StandardCalculator.feature" />
+    <None Include="Features\ScientificCalculator.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ScientificCalculator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\StandardCalculator.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StandardCalculator.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -176,14 +203,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.3.1.97\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.3.1.97\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" />
-  <Import Project="..\packages\SpecFlow.3.1.97\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.1.97\build\SpecFlow.targets')" />
-  <Import Project="..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.targets" Condition="Exists('..\packages\SpecFlow.MsTest.3.1.97\build\SpecFlow.MsTest.targets')" />
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
 </Project>

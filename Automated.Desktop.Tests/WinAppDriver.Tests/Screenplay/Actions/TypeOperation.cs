@@ -1,18 +1,19 @@
-﻿using OpenQA.Selenium;
+﻿using CSF.Screenplay.Actors;
+using CSF.Screenplay.Performables;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tranquire;
 using WinAppDriver.Tests.Calculator;
+using WinAppDriver.Tests.Screenplay.Abilities;
 
-namespace WinAppDriver.Tests.Actions
+namespace WinAppDriver.Tests.Screenplay.Actions
 {
-    public class TypeOperation : ActionUnit<CalculatorApp>
+    public class TypeOperation : Performable
     {
-        public override string Name => "Keyboard";
 
         public string Operation { get; }
         public TypeOperation(string operation)
@@ -20,7 +21,7 @@ namespace WinAppDriver.Tests.Actions
             Operation = operation;
         }
 
-        protected override void ExecuteWhen(IActor actor, CalculatorApp ability)
+        protected override void PerformAs(IPerformer actor)
         {
             string value = null;
             switch (Operation)
@@ -42,7 +43,8 @@ namespace WinAppDriver.Tests.Actions
                     break;
             }
 
-            ability.Session.Keyboard.SendKeys(value);
+            var ability = actor.GetAbility<ExecuteCalculator>();
+            ability.GetApp().Session.Keyboard.SendKeys(value);
         }
     }
 }
