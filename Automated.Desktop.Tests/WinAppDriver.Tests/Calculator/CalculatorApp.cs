@@ -10,40 +10,44 @@ namespace WinAppDriver.Tests.Calculator
 {
     public class CalculatorApp
     {
+
+        private static Lazy<CalculatorApp> lazy = new Lazy<CalculatorApp>(() => new CalculatorApp());
+
+        public static CalculatorApp Instance => lazy.Value;
+
         private const string ApplicationName = "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App";
 
-        public static WindowsDriver<WindowsElement> Session { get; private set; }
+        public WindowsDriver<WindowsElement> Session { get;}
 
-        public static StandardCalculator Standard { get; private set; }
+        public Standard Standard { get; set; }
 
-        public static ScientificCalculator Scientific { get; private set; }
+        public Scientific Scientific { get; set; }
 
-        public static WindowsElement ClearEntry => WinAppWrapper.GetElement(Session,"clearEntryButton");
+        public WindowsElement ClearEntry => WinAppWrapper.GetElement(Instance.Session,"clearEntryButton");
 
-        public static WindowsElement CalculatorResults => WinAppWrapper.GetElement(Session,"CalculatorResults");
+        public WindowsElement Result => WinAppWrapper.GetElement(Instance.Session,"CalculatorResults");
 
-        public static WindowsElement Header => WinAppWrapper.GetElement(Session,"Header");
+        public WindowsElement Header => WinAppWrapper.GetElement(Instance.Session,"Header");
 
-        private static WindowsElement ToggleMenuButton => WinAppWrapper.GetElement(Session,"TogglePaneButton");
+        public WindowsElement ToggleMenuButton => WinAppWrapper.GetElement(Instance.Session,"TogglePaneButton");
 
-        public static void StartCalculator()
+        private CalculatorApp()
         {
             Session = WinAppWrapper.OpenSession(ApplicationName);
-            Standard = new StandardCalculator(Session);
-            Scientific = new ScientificCalculator(Session);
+            Standard = new Standard(Session);
+            Scientific = new Scientific(Session);
         }
 
-        public static void CloseCalculator()
+        public void Close()
         {
-            WinAppWrapper.CloseSession(Session);
+            WinAppWrapper.CloseSession(Instance.Session);
         }
 
-        public static void SwitchToMenu(string option)
+        public WindowsElement SwitchToMenu(string option)
         {
-            ToggleMenuButton.Click();
-            var menuItems = WinAppWrapper.GetElement(Session,"MenuItemsHost");
-            var menuOption = menuItems?.FindElementByAccessibilityId(option);
-            menuOption?.Click();
+            Instance.ToggleMenuButton.Click();
+            var menuItems = WinAppWrapper.GetElement(Instance.Session,"MenuItemsHost");
+            return (WindowsElement)menuItems?.FindElementByAccessibilityId(option);       
         }
     }
 }
